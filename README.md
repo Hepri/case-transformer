@@ -1,7 +1,5 @@
 # case-transformer: golang library for code case transformation [![Build Status](https://travis-ci.org/Hepri/case-transformer.png?branch=master)](https://travis-ci.org/Hepri/case-transformer)
 
-StringUp: Golang Extension Library for Strings!
-
 ## Installation
 
 Install:
