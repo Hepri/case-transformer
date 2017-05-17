@@ -181,7 +181,7 @@ func StringToUnderscore(str string) string {
 	return StringToSnakeCase(str)
 }
 
-func StringToBracketCase(str string) string {
+func StringToKebabCase(str string) string {
 	parts := SplitToParts(str)
 	tParts := make([]string, 0, len(parts))
 	for _, p := range parts {

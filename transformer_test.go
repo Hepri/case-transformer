@@ -140,6 +140,7 @@ var transformArr = [][]string{
 	// [1] = camel
 	// [2] = pascal
 	// [3] = snake (underscore)
+	// [4] = kebab
 	[]string{"some_string", "someString", "SomeString", "some_string", "some-string"},
 	[]string{"some-string", "someString", "SomeString", "some_string", "some-string"},
 	[]string{"Some_String", "someString", "SomeString", "some_string", "some-string"},
@@ -172,6 +173,6 @@ func TestStringToUnderscore(t *testing.T) {
 	testTransform(t, 3, StringToUnderscore)
 }
 
-func TestStringToBracketCase(t *testing.T) {
-	testTransform(t, 4, StringToBracketCase)
+func TestStringToKebabCase(t *testing.T) {
+	testTransform(t, 4, StringToKebabCase)
 }
