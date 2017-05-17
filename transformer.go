@@ -16,19 +16,19 @@ const (
 	expectAnything = expectLower | expectUpper | expectDigit | expectUnknown
 )
 
-func IsAlphaUpper(s rune) bool {
+func isAlphaUpper(s rune) bool {
 	return s >= 'A' && s <= 'Z'
 }
 
-func IsAlphaLower(s rune) bool {
+func isAlphaLower(s rune) bool {
 	return s >= 'a' && s <= 'z'
 }
 
-func IsDigit(s rune) bool {
+func isDigit(s rune) bool {
 	return s >= '0' && s <= '9'
 }
 
-func IsDelimiter(s rune) bool {
+func isDelimiter(s rune) bool {
 	return s == '_' ||
 		s == '-' ||
 		s == ' ' ||
@@ -39,12 +39,12 @@ func IsDelimiter(s rune) bool {
 		s == '('
 }
 
-func IsAbbreviation(s string) bool {
+func isAbbreviation(s string) bool {
 	if len(s) == 0 {
 		return false
 	}
 	for _, ch := range s {
-		if !IsAlphaUpper(ch) {
+		if !isAlphaUpper(ch) {
 			return false
 		}
 	}
@@ -52,7 +52,7 @@ func IsAbbreviation(s string) bool {
 	return true
 }
 
-func SplitToParts(str string) []string {
+func splitToParts(str string) []string {
 	var parts []string
 	var currPart string = ""
 
@@ -66,7 +66,7 @@ func SplitToParts(str string) []string {
 		var partType int
 		var expectMatched bool
 
-		if IsAlphaUpper(s) {
+		if isAlphaUpper(s) {
 			partType = partUpperAlpha
 			expectMatched = (expectNext & expectUpper) > 0
 			if prevPartType == partUpperAlpha {
@@ -75,15 +75,15 @@ func SplitToParts(str string) []string {
 			} else {
 				expectNext = expectAnything
 			}
-		} else if IsAlphaLower(s) {
+		} else if isAlphaLower(s) {
 			partType = partLowerAlpha
 			expectMatched = (expectNext & expectLower) > 0
 			expectNext = expectLower | expectDigit | expectUnknown
-		} else if IsDigit(s) {
+		} else if isDigit(s) {
 			partType = partDigit
 			expectMatched = (expectNext & expectDigit) > 0
 			expectNext = expectLower | expectDigit | expectUnknown
-		} else if IsDelimiter(s) {
+		} else if isDelimiter(s) {
 			partType = partDelimiter
 			expectMatched = false
 			expectNext = expectAnything
@@ -129,9 +129,9 @@ func SplitToParts(str string) []string {
 	return parts
 }
 
-func InitCap(str string) string {
+func initCap(str string) string {
 	if len(str) > 0 {
-		if IsAbbreviation(str) {
+		if isAbbreviation(str) {
 			return str
 		} else {
 			return strings.ToUpper(string(str[0])) + strings.ToLower(str[1:])
@@ -144,12 +144,12 @@ func InitCap(str string) string {
 func StringToCamelCase(str string) string {
 	var s string
 
-	parts := SplitToParts(str)
+	parts := splitToParts(str)
 	for i, p := range parts {
 		if i == 0 {
 			s += strings.ToLower(p)
 		} else {
-			s += InitCap(p)
+			s += initCap(p)
 		}
 	}
 
@@ -159,16 +159,16 @@ func StringToCamelCase(str string) string {
 func StringToPascalCase(str string) string {
 	var s string
 
-	parts := SplitToParts(str)
+	parts := splitToParts(str)
 	for _, p := range parts {
-		s += InitCap(p)
+		s += initCap(p)
 	}
 
 	return s
 }
 
 func StringToSnakeCase(str string) string {
-	parts := SplitToParts(str)
+	parts := splitToParts(str)
 	tParts := make([]string, 0, len(parts))
 	for _, p := range parts {
 		tParts = append(tParts, strings.ToLower(p))
@@ -182,7 +182,7 @@ func StringToUnderscore(str string) string {
 }
 
 func StringToKebabCase(str string) string {
-	parts := SplitToParts(str)
+	parts := splitToParts(str)
 	tParts := make([]string, 0, len(parts))
 	for _, p := range parts {
 		tParts = append(tParts, strings.ToLower(p))
