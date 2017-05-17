@@ -11,22 +11,28 @@ Install:
 Possible transformations:
 - camelCase
 - PascalCase
-- snake_case (underscore)
+- snake_case (underscore_case)
 - kebab-case
 
 ```
-// -> 'someString'
-StringToCamelCase('SomeString')
+package main
 
-// -> 'SomeString'
-StringToPascalCase('someString')
+import (
+    "fmt"
+    "github.com/Hepri/case-transformer"
+)
 
-// -> 'some_string'
-StringToSnakeCase('someString')
+func main() {
+    // myTestString
+    fmt.Println(case_transformer.StringToCamelCase("my test string"))
+    // MyTestString
+    fmt.Println(case_transformer.StringToPascalCase("my test string"))
+    // my_test_string
+    fmt.Println(case_transformer.StringToSnakeCase("my test string"))
+    // my_test_string
+    fmt.Println(case_transformer.StringToUnderscore("my test string"))
+    // my-test-string
+    fmt.Println(case_transformer.StringToKebabCase("my test string"))
+}
 
-// -> 'some_string'
-StringToUnderscore('someString')
-
-// -> 'some-string'
-StringToKebabCase('someString')
 ```
