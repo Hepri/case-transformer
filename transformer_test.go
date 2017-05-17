@@ -8,87 +8,87 @@ import (
 
 func TestIsAlphaUpper(t *testing.T) {
 	for i := 'A'; i < 'Z'; i++ {
-		assert.True(t, IsAlphaUpper(i))
+		assert.True(t, isAlphaUpper(i))
 	}
 	for i := 'a'; i < 'z'; i++ {
-		assert.False(t, IsAlphaUpper(i))
+		assert.False(t, isAlphaUpper(i))
 	}
 	// some special
-	assert.False(t, IsAlphaUpper('0'))
-	assert.False(t, IsAlphaUpper('?'))
-	assert.False(t, IsAlphaUpper('!'))
-	assert.False(t, IsAlphaUpper('#'))
+	assert.False(t, isAlphaUpper('0'))
+	assert.False(t, isAlphaUpper('?'))
+	assert.False(t, isAlphaUpper('!'))
+	assert.False(t, isAlphaUpper('#'))
 }
 
 func TestIsAlphaLower(t *testing.T) {
 	for i := 'A'; i < 'Z'; i++ {
-		assert.False(t, IsAlphaLower(i))
+		assert.False(t, isAlphaLower(i))
 	}
 	for i := 'a'; i < 'z'; i++ {
-		assert.True(t, IsAlphaLower(i))
+		assert.True(t, isAlphaLower(i))
 	}
 	// some special
-	assert.False(t, IsAlphaLower('0'))
-	assert.False(t, IsAlphaLower('?'))
-	assert.False(t, IsAlphaLower('!'))
-	assert.False(t, IsAlphaLower('#'))
+	assert.False(t, isAlphaLower('0'))
+	assert.False(t, isAlphaLower('?'))
+	assert.False(t, isAlphaLower('!'))
+	assert.False(t, isAlphaLower('#'))
 }
 
 func TestIsDigit(t *testing.T) {
-	assert.True(t, IsDigit('0'))
-	assert.True(t, IsDigit('1'))
-	assert.True(t, IsDigit('2'))
-	assert.True(t, IsDigit('3'))
-	assert.True(t, IsDigit('4'))
-	assert.True(t, IsDigit('5'))
-	assert.True(t, IsDigit('6'))
-	assert.True(t, IsDigit('7'))
-	assert.True(t, IsDigit('8'))
-	assert.True(t, IsDigit('9'))
+	assert.True(t, isDigit('0'))
+	assert.True(t, isDigit('1'))
+	assert.True(t, isDigit('2'))
+	assert.True(t, isDigit('3'))
+	assert.True(t, isDigit('4'))
+	assert.True(t, isDigit('5'))
+	assert.True(t, isDigit('6'))
+	assert.True(t, isDigit('7'))
+	assert.True(t, isDigit('8'))
+	assert.True(t, isDigit('9'))
 
-	assert.False(t, IsDigit('z'))
-	assert.False(t, IsDigit('k'))
-	assert.False(t, IsDigit('l'))
-	assert.False(t, IsDigit('A'))
-	assert.False(t, IsDigit('B'))
+	assert.False(t, isDigit('z'))
+	assert.False(t, isDigit('k'))
+	assert.False(t, isDigit('l'))
+	assert.False(t, isDigit('A'))
+	assert.False(t, isDigit('B'))
 }
 
 func TestIsDelimiter(t *testing.T) {
-	assert.True(t, IsDelimiter('-'))
-	assert.True(t, IsDelimiter('_'))
-	assert.True(t, IsDelimiter(' '))
-	assert.True(t, IsDelimiter('?'))
-	assert.True(t, IsDelimiter('!'))
-	assert.True(t, IsDelimiter('*'))
-	assert.True(t, IsDelimiter('('))
-	assert.True(t, IsDelimiter(')'))
+	assert.True(t, isDelimiter('-'))
+	assert.True(t, isDelimiter('_'))
+	assert.True(t, isDelimiter(' '))
+	assert.True(t, isDelimiter('?'))
+	assert.True(t, isDelimiter('!'))
+	assert.True(t, isDelimiter('*'))
+	assert.True(t, isDelimiter('('))
+	assert.True(t, isDelimiter(')'))
 
-	assert.False(t, IsDelimiter('A'))
-	assert.False(t, IsDelimiter('a'))
-	assert.False(t, IsDelimiter('1'))
+	assert.False(t, isDelimiter('A'))
+	assert.False(t, isDelimiter('a'))
+	assert.False(t, isDelimiter('1'))
 }
 
 func TestIsAbbreviation(t *testing.T) {
-	assert.True(t, IsAbbreviation("ABC"))
-	assert.True(t, IsAbbreviation("JSON"))
+	assert.True(t, isAbbreviation("ABC"))
+	assert.True(t, isAbbreviation("JSON"))
 
-	assert.False(t, IsAbbreviation("json"))
-	assert.False(t, IsAbbreviation("String"))
-	assert.False(t, IsAbbreviation("someString"))
-	assert.False(t, IsAbbreviation("ABC-ABC"))
-	assert.False(t, IsAbbreviation("ABC_abc"))
+	assert.False(t, isAbbreviation("json"))
+	assert.False(t, isAbbreviation("String"))
+	assert.False(t, isAbbreviation("someString"))
+	assert.False(t, isAbbreviation("ABC-ABC"))
+	assert.False(t, isAbbreviation("ABC_abc"))
 }
 
 func TestInitCap(t *testing.T) {
-	assert.Equal(t, "Abc", InitCap("abc"))
-	assert.Equal(t, "Abc", InitCap("Abc"))
-	assert.Equal(t, "Abc", InitCap("aBC"))
+	assert.Equal(t, "Abc", initCap("abc"))
+	assert.Equal(t, "Abc", initCap("Abc"))
+	assert.Equal(t, "Abc", initCap("aBC"))
 	// abbreviation
-	assert.Equal(t, "ABC", InitCap("ABC"))
+	assert.Equal(t, "ABC", initCap("ABC"))
 }
 
 func testStringParts(t *testing.T, str string, parts []string) {
-	s := SplitToParts(str)
+	s := splitToParts(str)
 	assert.EqualValues(t, parts, s)
 }
 
